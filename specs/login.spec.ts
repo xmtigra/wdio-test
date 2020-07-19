@@ -14,7 +14,7 @@ describe('Login', () => {
 
     const testUser = new User();
 
-    before(async () => {
+    beforeAll(async () => {
         await loginPo.navigateTo(LOGIN.URL);
     });
 
@@ -77,7 +77,7 @@ describe('Login', () => {
         expect(await loginPo.isElementEnabled(loginPo.continueBtn)).toEqual(false);
     });
 
-    after(async () => {
+    afterAll(async () => {
         console.log('if you need, clear application data after test');
     });
 });

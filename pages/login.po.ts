@@ -34,27 +34,27 @@ class LoginPo extends BasePo {
         super();
     }
 
-    public async isOpen(): Promise<boolean> {
-        await this.waitForElementVisible(this.container);
-        return this.isElementDisplayed(this.container);
+    public async isOpen(): Promise<void> {
+        // await this.waitForElementVisible(this.container);
+        // return this.isElementDisplayed(this.container);
     }
 
     public async goToPasswordScreen(): Promise<void> {
-        await this.clickOnElement(loginPo.continueBtn);
-        await this.waitForElementVisible(this.passwordField);
+        // await this.clickOnElement(loginPo.continueBtn);
+        // await this.waitForElementVisible(this.passwordField);
     }
 
     public async goToLocationScreen(): Promise<void> {
-        await this.clickOnElement(loginPo.continueBtn);
-        await this.waitForElementVisible(this.firstNameField);
+        // await this.clickOnElement(loginPo.continueBtn);
+        // await this.waitForElementVisible(this.firstNameField);
     }
 
     public async fillEmailField(text: string | number): Promise<void> {
-        await this.typeElementText(this.emailField, text);
+        // await this.typeElementText(this.emailField, text);
     }
 
     public async fillPasswordField(text: string | number): Promise<void> {
-        await this.typeElementText(this.passwordField, text);
+        // await this.typeElementText(this.passwordField, text);
     }
 
 }
