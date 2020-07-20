@@ -1,4 +1,4 @@
-import { BasePo } from './base.po';
+import {BasePo} from './base.po';
 
 class LoginPo extends BasePo {
 
@@ -7,7 +7,21 @@ class LoginPo extends BasePo {
     }
 
     get loginButtons() {
-        return $$('#gc_login_widget_container button');
+        return this.container.then((item) => {
+            return item.$$('button');
+        })
+    }
+
+    get loginBtnFirst() {
+        return this.loginButtons.then((items) => {
+            return items[1];
+        })
+    }
+
+    get loginBtnSecond() {
+        return this.loginButtons.then((items) => {
+            return items[2];
+        })
     }
 
     get emailField() {
@@ -34,27 +48,27 @@ class LoginPo extends BasePo {
         super();
     }
 
-    public async isOpen(): Promise<void> {
-        // await this.waitForElementVisible(this.container);
-        // return this.isElementDisplayed(this.container);
+    public async isOpen(): Promise<boolean> {
+        await this.waitForElementVisible(this.container);
+        return this.isElementDisplayed(this.container);
     }
 
     public async goToPasswordScreen(): Promise<void> {
-        // await this.clickOnElement(loginPo.continueBtn);
-        // await this.waitForElementVisible(this.passwordField);
+        await this.clickOnElement(loginPo.continueBtn);
+        await this.waitForElementVisible(this.passwordField);
     }
 
     public async goToLocationScreen(): Promise<void> {
-        // await this.clickOnElement(loginPo.continueBtn);
-        // await this.waitForElementVisible(this.firstNameField);
+        await this.clickOnElement(loginPo.continueBtn);
+        await this.waitForElementVisible(this.firstNameField);
     }
 
     public async fillEmailField(text: string | number): Promise<void> {
-        // await this.typeElementText(this.emailField, text);
+        await this.typeElementText(this.emailField, text);
     }
 
     public async fillPasswordField(text: string | number): Promise<void> {
-        // await this.typeElementText(this.passwordField, text);
+        await this.typeElementText(this.passwordField, text);
     }
 
 }

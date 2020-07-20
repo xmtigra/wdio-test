@@ -1,4 +1,4 @@
-const faker = require('faker');
+import faker from "faker";
 
 class GeneratorData {
 
@@ -26,7 +26,7 @@ class GeneratorData {
         return 'test2-' + this.generateRandomHash() + '@yopmail.com';
     }
 
-    public generateUserPassword(length = 8) {
+    public generateUserPassword(length = 8): string {
         let password = faker.internet.password(length, false, '[a-zA-Z0-9]');
         if (password.match(/^[0-9]+$/) !== null) {
             password = this.generateUserPassword(length);
@@ -38,16 +38,12 @@ class GeneratorData {
         return faker.company.companyName(0);
     }
 
-    public generateDescription(wordCount = 4): string {
-        return faker.lorem.sentence(wordCount);
-    }
-
     public generateRandomHash(): string {
         return Date.now().toString(36) + Math.random().toString(36).substr(2, 5);
     }
 
     public generateNumber(): number {
-        return faker.random.number({ min: 10 });
+        return faker.random.number({min: 10});
     }
 
 }

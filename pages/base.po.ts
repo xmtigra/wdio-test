@@ -1,10 +1,6 @@
 export class BasePo {
 
-    private defaultTimeout: number = 4000;
-    private defaultUIRetries: number = 4;
-    private defaultELRetries: number = 10;
-
-    public async navigateTo(url: string, timeout: number = 3000): Promise<void> {
+    public async navigateTo(url: string): Promise<void> {
         return browser.navigateTo(url);
     }
 
@@ -20,173 +16,84 @@ export class BasePo {
         await browser.pause(ms);
     }
 
-    // public async waitForElementText(element: ElementFinder, text: string, { timeout = this.defaultTimeout, maxRetries = this.defaultUIRetries } = {}): Promise<void> {
-    //     let currentRetry: number = 0;
-    //     let error: Error;
-    //     do {
-    //         try {
-    //             await browser.wait(protractor.ExpectedConditions.textToBePresentInElement(element, text), timeout);
-    //             return;
-    //         } catch (err) {
-    //             currentRetry++;
-    //             error = err;
-    //         }
-    //     } while (currentRetry < maxRetries);
-    //     throw new Error(`Element ${element.locator()} is not containing specified text: ${text} after maximum retries (${maxRetries}), Error message: ${error.name.toString()}`);
-    // }
-    //
-    // public async waitForElementVisible(element: ElementFinder, { timeout = this.defaultTimeout, maxRetries = this.defaultUIRetries } = {}): Promise<void> {
-    //     let currentRetry: number = 0;
-    //     let error: Error;
-    //     do {
-    //         try {
-    //             await browser.wait(protractor.ExpectedConditions.and(
-    //                 protractor.ExpectedConditions.visibilityOf(element),
-    //                 protractor.ExpectedConditions.elementToBeClickable(element)), timeout);
-    //             return;
-    //         } catch (err) {
-    //             currentRetry++;
-    //             error = err;
-    //         }
-    //     } while (currentRetry < maxRetries);
-    //     throw new Error(`Element ${element.locator()} is not visible after maximum retries (${maxRetries}), Error message: ${error.name.toString()}`);
-    // }
-    //
-    // public async waitForElementInvisible(element: ElementFinder, { timeout = this.defaultTimeout, maxRetries = this.defaultUIRetries } = {}): Promise<void> {
-    //     let currentRetry: number = 0;
-    //     let error: Error;
-    //     do {
-    //         try {
-    //             await browser.wait(protractor.ExpectedConditions.invisibilityOf(element), timeout);
-    //             return;
-    //         } catch (err) {
-    //             currentRetry++;
-    //             error = err;
-    //         }
-    //     } while (currentRetry < maxRetries);
-    //     throw new Error(`Element ${element.locator()} is still visible after maximum retries (${maxRetries}), Error message: ${error.name.toString()}`);
-    // }
-    //
-    // public async waitForElementClickable(element: ElementFinder, { timeout = this.defaultTimeout, maxRetries = this.defaultUIRetries } = {}): Promise<void> {
-    //     let currentRetry: number = 0;
-    //     let error: Error;
-    //     do {
-    //         try {
-    //             await browser.wait(protractor.ExpectedConditions.elementToBeClickable(element), timeout);
-    //             return;
-    //         } catch (err) {
-    //             currentRetry++;
-    //             error = err;
-    //         }
-    //     } while (currentRetry < maxRetries);
-    //     throw new Error(`Element ${element.locator()} is not clickable after maximum retries (${maxRetries}), Error message: ${error.name.toString()}`);
-    // }
-    //
-    // public async waitForListCountChanged(list: ElementArrayFinder, expectedCount: number, { timeout = this.defaultTimeout, maxRetries = this.defaultUIRetries } = {}): Promise<void> {
-    //     let currentRetry: number = 0;
-    //     let error: Error;
-    //     do {
-    //         try {
-    //             await browser.wait(() => {
-    //                 return list.count().then((actualValue) => {
-    //                     return actualValue === expectedCount;
-    //                 });
-    //             }, timeout);
-    //             return;
-    //         } catch (err) {
-    //             currentRetry++;
-    //             error = err;
-    //         }
-    //     } while (currentRetry < maxRetries);
-    //     throw new Error(`List ${list.locator()} count does not changed after maximum retries (${maxRetries}), Error message: ${error.name.toString()}`);
-    // }
-    //
-    // public async waitForElementToBeSelected(tgtElement: ElementFinder, { timeout = this.defaultTimeout, maxRetries = this.defaultUIRetries } = {}): Promise<void> {
-    //     let currentRetry: number = 0;
-    //     let error: Error;
-    //     do {
-    //         try {
-    //             await browser.wait(protractor.ExpectedConditions.elementToBeSelected(tgtElement), timeout);
-    //             return;
-    //         } catch (err) {
-    //             currentRetry++;
-    //             error = err;
-    //         }
-    //     } while (currentRetry < maxRetries);
-    //     throw new Error(`Element ${tgtElement.locator()} wasn't selected after maximum retries (${maxRetries}), Error message: ${error.name.toString()}`);
-    // }
-
-    constructor() {
-        console.log('BasePo');
+    public async waitForElementText(): Promise<void> {
+        // coming soon
     }
 
-    // public async isElementPresent(element: ElementFinder, maxRetries = this.defaultELRetries): Promise<boolean> {
-    //     let res;
-    //     for (let i = 0; i < maxRetries; i++) {
-    //         res = await element.isPresent();
-    //         if (res === true) {
-    //             return res;
-    //         }
-    //     }
-    //     return false;
-    // }
-    //
-    // public async isElementDisplayed(element: ElementFinder, maxRetries = this.defaultELRetries): Promise<boolean> {
-    //     await this.isElementPresent(element);
-    //     let res;
-    //     for (let i = 0; i < maxRetries; i++) {
-    //         res = await element.isDisplayed();
-    //         if (res === true) {
-    //             return res;
-    //         }
-    //     }
-    //     return false;
-    // }
-    //
-    // public async isElementEnabled(element: ElementFinder): Promise<boolean> {
-    //     await this.isElementPresent(element);
-    //     return element.isEnabled();
-    // }
-    //
-    // public async isElementSelected(element: ElementFinder): Promise<boolean> {
-    //     await this.isElementPresent(element);
-    //     return element.isSelected();
-    // }
-    //
-    // public async getElementText(element: ElementFinder): Promise<string> {
-    //     await this.isElementPresent(element);
-    //     return element.getText();
-    // }
-    //
-    // public async clearElementField(element: ElementFinder): Promise<void> {
-    //     await this.isElementPresent(element);
-    //     await element.clear();
-    // }
-    //
-    // public async typeElementText(element: ElementFinder, text: string | number): Promise<void> {
-    //     await this.isElementPresent(element);
-    //     await this.clearElementField(element);
-    //     await element.sendKeys(text);
-    // }
-    //
-    // public async getElementCssValue(element: ElementFinder, value: string): Promise<string> {
-    //     await this.isElementPresent(element);
-    //     return element.getCssValue(value);
-    // }
-    //
-    // public async getElementValue(element: ElementFinder): Promise<string> {
-    //     await this.isElementPresent(element);
-    //     return element.getAttribute('value');
-    // }
-    //
-    // public async getElementAttribute(element: ElementFinder, name: string): Promise<string> {
-    //     await this.isElementPresent(element);
-    //     return element.getAttribute(name);
-    // }
-    //
-    // public async clickOnElement(element: ElementFinder): Promise<void> {
-    //     await this.waitForElementClickable(element);
-    //     await element.click();
-    // }
+    public async waitForElementVisible(element: Promise<WebdriverIO.Element>): Promise<boolean> {
+        return (await element).waitForDisplayed();
+    }
+
+    public async waitForElementInvisible(): Promise<void> {
+        // coming soon
+    }
+
+    public async waitForElementClickable(element: Promise<WebdriverIO.Element>): Promise<boolean> {
+        return (await element).waitForClickable();
+    }
+
+    public async waitForListCountChanged(): Promise<void> {
+        // coming soon
+    }
+
+    constructor() {
+        console.log('Base Page')
+    }
+
+    public async isElementPresent(element: Promise<WebdriverIO.Element>): Promise<boolean> {
+        return (await element).waitForExist();
+    }
+
+    public async isElementDisplayed(element: Promise<WebdriverIO.Element>): Promise<boolean> {
+        await this.isElementPresent(element);
+        return (await element).waitForDisplayed();
+    }
+
+    public async isElementEnabled(element: Promise<WebdriverIO.Element>): Promise<boolean> {
+        await this.isElementPresent(element);
+        return (await element).isEnabled();
+    }
+
+    public async isElementSelected(element: Promise<WebdriverIO.Element>): Promise<boolean> {
+        await this.isElementPresent(element);
+        return (await element).isSelected();
+    }
+
+    public async getElementText(element: Promise<WebdriverIO.Element>): Promise<string> {
+        await this.isElementPresent(element);
+        return (await element).getText();
+    }
+
+    public async clearElementField(element: Promise<WebdriverIO.Element>): Promise<void> {
+        await this.isElementPresent(element);
+        return (await element).clearValue();
+    }
+
+    public async typeElementText(element: Promise<WebdriverIO.Element>, text: string | number): Promise<void> {
+        await this.isElementPresent(element);
+        await this.clearElementField(element);
+        return (await element).setValue(text);
+    }
+
+    public async getElementCssValue(element: Promise<WebdriverIO.Element>, value: string): Promise<string> {
+        await this.isElementPresent(element);
+        const css: Promise<WebdriverIO.CSSProperty> = (await element).getCSSProperty(value);
+        return (await css).value;
+    }
+
+    public async getElementValue(element: Promise<WebdriverIO.Element>): Promise<string> {
+        await this.isElementPresent(element);
+        return (await element).getValue();
+    }
+
+    public async getElementAttribute(element: Promise<WebdriverIO.Element>, name: string): Promise<string> {
+        await this.isElementPresent(element);
+        return (await element).getAttribute(name);
+    }
+
+    public async clickOnElement(element: Promise<WebdriverIO.Element>): Promise<void> {
+        await this.waitForElementClickable(element);
+        await (await element).click();
+    }
 
 }
