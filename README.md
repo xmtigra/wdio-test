@@ -1,5 +1,3 @@
-# wdio-example
- 
 ## Setup:
 * Install [Node](http://nodejs.org) (v14.x.x or later)
 * Follow setup steps described [here](http://www.protractortest.org/#/tutorial#setup)
