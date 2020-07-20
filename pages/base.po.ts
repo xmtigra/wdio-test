@@ -37,7 +37,7 @@ export class BasePo {
     }
 
     constructor() {
-        console.log('Base Page')
+        console.log('Base Page');
     }
 
     public async isElementPresent(element: Promise<WebdriverIO.Element>): Promise<boolean> {

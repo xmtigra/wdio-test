@@ -1,4 +1,4 @@
-import {BasePo} from './base.po';
+import { BasePo } from './base.po';
 
 class LoginPo extends BasePo {
 
@@ -9,19 +9,19 @@ class LoginPo extends BasePo {
     get loginButtons() {
         return this.container.then((item) => {
             return item.$$('button');
-        })
+        });
     }
 
     get loginBtnFirst() {
         return this.loginButtons.then((items) => {
             return items[1];
-        })
+        });
     }
 
     get loginBtnSecond() {
         return this.loginButtons.then((items) => {
             return items[2];
-        })
+        });
     }
 
     get emailField() {

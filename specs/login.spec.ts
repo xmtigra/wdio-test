@@ -1,6 +1,6 @@
-import {loginPo} from '../pages/login.po';
-import {LOGIN, UI} from '../data/strings.data';
-import {User} from "../data/user.data";
+import { loginPo } from '../pages/login.po';
+import { LOGIN, UI } from '../data/strings.data';
+import { User } from '../data/user.data';
 
 // verify url
 // verify browser title
