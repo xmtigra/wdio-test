@@ -12,7 +12,7 @@
     "faker",
     "jasmine"
   ],
-  "license": "ISC"
+  "license": "ISC",
   "scripts": {
     "test": "wdio run wdio.conf.ts"
   },
