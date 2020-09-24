@@ -1,4 +1,4 @@
-module.exports.config = {
+exports.config = {
     //
     // ====================
     // Runner Configuration
@@ -17,7 +17,7 @@ module.exports.config = {
     // directory is where your package.json resides, so `wdio` will be called from there.
     //
     specs: [
-        './specs/*.ts',
+        './specs/**/*.ts'
     ],
     // Patterns to exclude.
     exclude: [
@@ -46,14 +46,14 @@ module.exports.config = {
     // https://docs.saucelabs.com/reference/platforms-configurator
     //
     capabilities: [{
-
+    
         // maxInstances can get overwritten per capability. So if you have an in-house Selenium
         // grid with only 5 firefox instances available you can make sure that not more than
         // 5 instances get started at a time.
-        maxInstances: 1,
+        maxInstances: 5,
         //
         browserName: 'chrome',
-        acceptInsecureCerts: true,
+        acceptInsecureCerts: true
         // If outputDir is provided WebdriverIO can capture driver session logs
         // it is possible to configure which logTypes to include/exclude.
         // excludeDriverLogs: ['*'], // pass '*' to exclude all driver session logs
@@ -66,7 +66,7 @@ module.exports.config = {
     // Define all options that are relevant for the WebdriverIO instance here
     //
     // Level of logging verbosity: trace | debug | info | warn | error | silent
-    logLevel: 'info',
+    logLevel: 'debug',
     //
     // Set specific log levels per logger
     // loggers:
@@ -106,8 +106,8 @@ module.exports.config = {
     // Services take over a specific job you don't want to take care of. They enhance
     // your test setup with almost no effort. Unlike plugins, they don't add new
     // commands. Instead, they hook themselves up into the test process.
-    services: ['selenium-standalone'],
-
+    services: ['chromedriver'],
+    
     // Framework you want to run your specs with.
     // The following are supported: Mocha, Jasmine, and Cucumber
     // see also: https://webdriver.io/docs/frameworks.html
@@ -119,6 +119,9 @@ module.exports.config = {
     // The number of times to retry the entire specfile when it fails as a whole
     // specFileRetries: 1,
     //
+    // Delay in seconds between the spec file retry attempts
+    // specFileRetriesDelay: 0,
+    //
     // Whether or not retried specfiles should be retried immediately or deferred to the end of the queue
     // specFileRetriesDeferred: false,
     //
@@ -126,16 +129,26 @@ module.exports.config = {
     // The only one supported by default is 'dot'
     // see also: https://webdriver.io/docs/dot-reporter.html
     reporters: ['spec'],
+
+
+    
+    //
+    // Options to be passed to Jasmine.
     jasmineNodeOpts: {
         // TypeScript setup
-        requires: ['ts-node/register', 'tsconfig-paths/register'],
-        ui: 'bdd',
-        showColors: true,
-        print: function () {
-        },
-        includeStackTrace: true,
-        defaultTimeoutInterval: 60000
+        requires: ['ts-node/register'],
+        // Jasmine default timeout
+        defaultTimeoutInterval: 60000,
+        //
+        // The Jasmine framework allows interception of each assertion in order to log the state of the application
+        // or website depending on the result. For example, it is pretty handy to take a screenshot every time
+        // an assertion fails.
+        expectationResultHandler: function(passed, assertion) {
+            // do something
+        }
     },
+    
+    //
     // =====
     // Hooks
     // =====
@@ -258,10 +271,10 @@ module.exports.config = {
     // onComplete: function(exitCode, config, capabilities, results) {
     // },
     /**
-     * Gets executed when a refresh happens.
-     * @param {String} oldSessionId session ID of the old session
-     * @param {String} newSessionId session ID of the new session
-     */
+    * Gets executed when a refresh happens.
+    * @param {String} oldSessionId session ID of the old session
+    * @param {String} newSessionId session ID of the new session
+    */
     //onReload: function(oldSessionId, newSessionId) {
     //}
-};
+}

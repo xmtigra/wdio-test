@@ -20,7 +20,7 @@ export class BasePo {
         // coming soon
     }
 
-    public async waitForElementVisible(element: Promise<WebdriverIO.Element>): Promise<boolean> {
+    public async waitForElementVisible(element: WebdriverIO.Element): Promise<boolean> {
         return (await element).waitForDisplayed();
     }
 
@@ -28,7 +28,7 @@ export class BasePo {
         // coming soon
     }
 
-    public async waitForElementClickable(element: Promise<WebdriverIO.Element>): Promise<boolean> {
+    public async waitForElementClickable(element: WebdriverIO.Element): Promise<boolean> {
         return (await element).waitForClickable();
     }
 
@@ -40,58 +40,58 @@ export class BasePo {
         console.log('Base Page');
     }
 
-    public async isElementPresent(element: Promise<WebdriverIO.Element>): Promise<boolean> {
+    public async isElementPresent(element: WebdriverIO.Element): Promise<boolean> {
         return (await element).waitForExist();
     }
 
-    public async isElementDisplayed(element: Promise<WebdriverIO.Element>): Promise<boolean> {
+    public async isElementDisplayed(element: WebdriverIO.Element): Promise<boolean> {
         await this.isElementPresent(element);
         return (await element).waitForDisplayed();
     }
 
-    public async isElementEnabled(element: Promise<WebdriverIO.Element>): Promise<boolean> {
+    public async isElementEnabled(element: WebdriverIO.Element): Promise<boolean> {
         await this.isElementPresent(element);
         return (await element).isEnabled();
     }
 
-    public async isElementSelected(element: Promise<WebdriverIO.Element>): Promise<boolean> {
+    public async isElementSelected(element: WebdriverIO.Element): Promise<boolean> {
         await this.isElementPresent(element);
         return (await element).isSelected();
     }
 
-    public async getElementText(element: Promise<WebdriverIO.Element>): Promise<string> {
+    public async getElementText(element: WebdriverIO.Element): Promise<string> {
         await this.isElementPresent(element);
         return (await element).getText();
     }
 
-    public async clearElementField(element: Promise<WebdriverIO.Element>): Promise<void> {
+    public async clearElementField(element: WebdriverIO.Element): Promise<void> {
         await this.isElementPresent(element);
         return (await element).clearValue();
     }
 
-    public async typeElementText(element: Promise<WebdriverIO.Element>, text: string | number): Promise<void> {
+    public async typeElementText(element: WebdriverIO.Element, text: string | number): Promise<void> {
         await this.isElementPresent(element);
         await this.clearElementField(element);
         return (await element).setValue(text);
     }
 
-    public async getElementCssValue(element: Promise<WebdriverIO.Element>, value: string): Promise<string> {
+    public async getElementCssValue(element: WebdriverIO.Element, value: string): Promise<string> {
         await this.isElementPresent(element);
-        const css: Promise<WebdriverIO.CSSProperty> = (await element).getCSSProperty(value);
+        const css: any = (await element).getCSSProperty(value);
         return (await css).value;
     }
 
-    public async getElementValue(element: Promise<WebdriverIO.Element>): Promise<string> {
+    public async getElementValue(element: WebdriverIO.Element): Promise<string> {
         await this.isElementPresent(element);
         return (await element).getValue();
     }
 
-    public async getElementAttribute(element: Promise<WebdriverIO.Element>, name: string): Promise<string> {
+    public async getElementAttribute(element: WebdriverIO.Element, name: string): Promise<string> {
         await this.isElementPresent(element);
         return (await element).getAttribute(name);
     }
 
-    public async clickOnElement(element: Promise<WebdriverIO.Element>): Promise<void> {
+    public async clickOnElement(element: WebdriverIO.Element): Promise<void> {
         await this.waitForElementClickable(element);
         await (await element).click();
     }

@@ -5,12 +5,7 @@
     "lib": ["esnext"],
     "strict": false,
     "typeRoots": ["node_modules/@types"],
-    "types": [
-       "node",
-       "webdriverio",
-       "@wdio/jasmine-framework",
-       "@wdio/selenium-standalone-service"
-    ],
+    "types": ["node", "@wdio/sync", "@wdio/jasmine-framework"],
     "esModuleInterop": true,
     "inlineSourceMap": true,
     "inlineSources": true,
