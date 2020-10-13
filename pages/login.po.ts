@@ -6,24 +6,6 @@ class LoginPo extends BasePo {
         return $('#gc_login_widget_container');
     }
 
-    get loginButtons() {
-        return this.container.then((item) => {
-            return item.$$('button');
-        });
-    }
-
-    get loginBtnFirst() {
-        return this.loginButtons.then((items) => {
-            return items[1];
-        });
-    }
-
-    get loginBtnSecond() {
-        return this.loginButtons.then((items) => {
-            return items[2];
-        });
-    }
-
     get emailField() {
         return $('[name="gc_email"]');
     }
