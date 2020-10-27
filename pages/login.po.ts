@@ -1,4 +1,4 @@
-import { BasePo } from './base.po';
+import {BasePo} from './base.po';
 
 class LoginPo extends BasePo {
 

@@ -43,7 +43,7 @@ class GeneratorData {
     }
 
     public generateNumber(): number {
-        return faker.random.number({ min: 10 });
+        return faker.random.number({min: 10});
     }
 
 }

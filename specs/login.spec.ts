@@ -52,9 +52,9 @@ describe('Login', () => {
 
     // verify is element displayed
     it(`click on continue button`, async () => {
-       await loginPo.goToLocationScreen();
-       expect(await loginPo.isElementDisplayed(loginPo.firstNameField)).toEqual(true);
-       expect(await loginPo.isElementDisplayed(loginPo.lastNameField)).toEqual(true);
+        await loginPo.goToLocationScreen();
+        expect(await loginPo.isElementDisplayed(loginPo.firstNameField)).toEqual(true);
+        expect(await loginPo.isElementDisplayed(loginPo.lastNameField)).toEqual(true);
     });
 
     // verify button state

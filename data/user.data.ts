@@ -1,4 +1,4 @@
-import { generatorData } from './generator.data';
+import {generatorData} from './generator.data';
 
 export class User implements InterfaceUser {
     public firstName: string = generatorData.generateUserFirstName();
