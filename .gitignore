@@ -3,3 +3,5 @@ node_modules/
 .idea
 *.js
 .DS_Store
+allure-report/
+allure-results/
