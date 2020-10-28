@@ -108,7 +108,7 @@ export class BasePo {
         await browser.switchToWindow(currHandle);
     }
 
-    public async forceLogOut() {
+    public async forceLogOut(): Promise<void> {
         await browser.clearLocalStorage();
         await browser.clearSessionStorage();
         await browser.deleteAllCookies();
