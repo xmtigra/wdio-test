@@ -16,24 +16,103 @@ export class BasePo {
         await browser.pause(ms);
     }
 
-    public async waitForElementText(): Promise<void> {
-        // coming soon
+    public async waitForElementText(element: WebdriverIO.Element, text: string): Promise<void> {
+        let currRetry = 0, error;
+        do {
+            try {
+                await browser.waitUntil(() => {
+                    const txt = element.getText();
+                    return txt === text;
+                }, {timeout: 4000});
+                return;
+            } catch (err) {
+                currRetry++;
+                error = err;
+            }
+        } while (currRetry < 5);
+        throw new Error(`Element ${element.selector} is not containing specified text: ${text}
+        after maximum retries (${5}), Error message: ${error.toString()}`);
     }
 
     public async waitForElementVisible(element: WebdriverIO.Element): Promise<boolean> {
         return (await element).waitForDisplayed();
     }
 
-    public async waitForElementInvisible(): Promise<void> {
-        // coming soon
+    public async waitForElementInvisible(element: WebdriverIO.Element): Promise<void> {
+        let currRetry = 0, error;
+        do {
+            try {
+                await browser.waitUntil(() => !element.isDisplayed(), {timeout: 4000});
+                return;
+            } catch (err) {
+                currRetry++;
+                error = err;
+            }
+        } while (currRetry < 5);
+        throw new Error(`Element ${element.selector} is still visible
+        after maximum retries (${5}), Error message: ${error.toString()}`);
     }
 
     public async waitForElementClickable(element: WebdriverIO.Element): Promise<boolean> {
         return (await element).waitForClickable();
     }
 
-    public async waitForListCountChanged(): Promise<void> {
-        // coming soon
+    public async waitForListCountChanged(list: WebdriverIO.ElementArray, expectedCount: number): Promise<void> {
+        let currRetry = 0, elements, error;
+        do {
+            try {
+                elements = await $$(list.selector);
+                await browser.waitUntil(() => {
+                    return elements.length === expectedCount;
+                }, {timeout: 4000});
+                return;
+            } catch (err) {
+                currRetry++;
+                error = err;
+            }
+        } while (currRetry < 5);
+        throw new Error(`List ${list.selector} count does not changed
+        after maximum retries (${5}), Error message: ${error.name.toString()}`);
+    }
+
+    public async switchToIframe(element: WebdriverIO.Element): Promise<void> {
+        await this.isElementDisplayed(element);
+        await browser.switchToFrame((await element));
+        await this.wait(100);
+    }
+
+    public async switchToNextTab(): Promise<void> {
+        const handlesList = await browser.getWindowHandles();
+        const currHandle = await browser.getWindowHandle();
+        const index = handlesList.findIndex(tab => tab === currHandle);
+        const newTabHandle = handlesList[index + 1];
+        return browser.switchToWindow(newTabHandle);
+    }
+
+    public async switchToTabByIndex(tabIndex): Promise<void> {
+        const handlesList = await browser.getWindowHandles();
+        const tgtTabHandle = handlesList[tabIndex];
+        await browser.switchToWindow(tgtTabHandle);
+    }
+
+    public async closeUnusedTabs(): Promise<void> {
+        const currHandle = await browser.getWindowHandle();
+        const handlesList = await browser.getWindowHandles();
+        for (let i = 0; i < handlesList.length; i++) {
+            if (handlesList[i] !== currHandle) {
+                await browser.switchToWindow(handlesList[i]);
+                await browser.closeWindow();
+            }
+        }
+        await browser.switchToFrame(null)
+        await browser.switchToWindow(currHandle);
+    }
+
+    public async forceLogOut() {
+        await browser.clearLocalStorage();
+        await browser.clearSessionStorage();
+        await browser.deleteAllCookies();
+        await this.closeUnusedTabs();
     }
 
     constructor() {
